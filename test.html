@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<style>
+
+
+body {	background-color: black;
+ 		margin: 0px;
+ 		height: 100%;
+ 		width: 100%;
+ 	}
+
+canvas{	position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+
+svg{ 	position:absolute;
+	 	top:0;
+	 	bottom:0;
+	 	left:0;
+	 	right:0;}
+
+#right_sec{
+		position: absolute;
+
+		right: 0;
+
+		height: 100%;
+  		width: 25%;
+
+  		background-color: deepskyblue;
+
+  		animation: 2s linear 0s infinite test;
+	}
+
+
+@keyframes test{
+
+	0%{
+		width: 25%;
+	}
+
+
+	50%{
+		width: 0%;
+	}
+
+
+	100%{
+		width: 25%;
+	}
+
+}
+
+</style>
+
+</head>
+<body id = "bod" onload="resize()">
+
+<div id = "testdiv"></div>
+
+<div id = "right_sec" ></div>
+
+<script type="text/javascript">
+
+	function angleToRadian(angle){
+
+		return angle * Math.PI / 180;
+	}
+
+	function resize() {
+		
+		var svg1 = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+
+		svg1.setAttribute('width', 1400);
+		svg1.setAttribute('height', 1400);
+
+		var rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+
+		svg1.insertAdjacentHTML("afterbegin", "<rect x = '10' y = '10' width = '20' height = '20' stroke = 'cyan'/>");
+
+		let angle = 150;
+
+
+		let angle_cos = Math.cos(angleToRadian(angle));
+		let angle_sin = Math.sin(angleToRadian(angle));
+
+		let start_x = 100; let start_y = 100;
+		let l = 200; let w = 10;
+
+		// підхід 1: pivot point знаходиться зліва зверху (для елементів, що промальовуються зверху і повернуті вправо)
+		let start_pos = `M ${start_x} ${start_y}`;
+		let line1 = `l ${-w * angle_cos} ${-w * angle_sin}`;
+		let line2 = `l ${l * angle_sin} ${-l * angle_cos}`;
+		let line3 = `l ${w * angle_cos} ${w * angle_sin}`;
+
+		let result = `<path d = '${start_pos} ${line1} ${line2} ${line3} Z' fill = 'cyan'>`;
+		console.log(result);
+
+
+		// todo: підхід, у якому pivot point знаходиться справа зверху (для елем-в, що промальовуються зверху і повернуті вліво)
+
+		
+
+		svg1.insertAdjacentHTML('beforeend', result);
+
+
+		document.getElementById('testdiv').appendChild(svg1);
+	}
+
+</script>
+</body>
+</html>
