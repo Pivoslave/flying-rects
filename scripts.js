@@ -10,13 +10,7 @@ var rect_vertical_offset = new Array(0);
 var incrementer = 0;
 var amount = 0;
 
-addEventListener("resize", (event) => {
-    document.getElementById("svg_page").setAttribute("width", window.innerWidth);
-    document.getElementById("svg_page").setAttribute("height", window.innerHeight);
-    console.log(window.innerWidth + ", " + window.innerHeight);
-});
 
-window.onresize = resize;
 
 
 function angleToRadian(angle){
