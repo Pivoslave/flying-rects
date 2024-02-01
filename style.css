@@ -288,3 +288,9 @@ svg{ 	position:absolute;
         left: 100%;
     }
 }
+
+@media (max-width: 991px){
+    svg{
+        pointer-events: none;
+    }
+}
