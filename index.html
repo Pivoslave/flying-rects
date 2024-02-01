@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+	<link rel="stylesheet" href="style.css">
+	<script src="scripts.js"></script>
+
+
+</head>
+<body id = "bod" onload="resize()">
+
+<div id = "testdiv">
+
+</div>
+
+<div id = "right_sec" >
+	
+	<p id = "angles_label">Choose an angle of lines (-90...90):</p>
+	<input type="number" name="" id = "angles" class = "info_input">
+
+	<p id = "min_width_label"> Input minimal width: </p>
+	<input id = "min_width" type="number"></input>
+
+	<p id = "max_width_label"> Input maximal width: </p>
+	<input id= "max_width" type="number"></input>
+
+	<p id = "min_height_label"> Input minimal height: </p>
+	<input type="number" id = "min_height"></input>
+
+	<p id="max_height_label">Input maximal height:</p>
+	<input type="number" id = "max_height"></input>
+
+	<div id = "blanker">
+
+	<label id = "label-blank"> 
+		Should generation start with blank space? <input type="checkbox" id = "blank_choice"></input>
+ 	</label>
+
+	<!-- <p id="space_start">Should generation start with a blank space?</p> -->
+	</div>
+
+	<p id="r_ranges"> Select red color ranges:</p>
+	<input type="number" id = "r_min"></input>
+	<input type="number" id = "r_max"></input>
+
+	<p id="g_ranges"> Select green color ranges:</p>
+	<input type="number" id = "g_min"></input>
+	<input type="number" id = "g_max"></input>
+
+	<p id="b_ranges"> Select blue color ranges:</p>
+	<input type="number" id = "b_min"></input>
+	<input type="number" id = "b_max"></input>
+
+	<div id = "color_ex">
+		
+		<svg id = "lesser_color"></svg>
+		<svg id = "bigger_color"></svg>
+
+	</div>
+
+	<p id="min_anim_label"> Select minimal animation length (in ms):</p>
+	<input type="number" id = "min_anim"></input>
+
+	<p id="max_anim_label"> Select maximal animation length (in ms):</p>
+	<input type="number" id = "max_anim"></input>
+
+	<p id="anim_step_label"> Select animation randomisation step (in ms): </p>
+	<input type="number" id = "anim_step"></input>
+
+	<p id="offset_min_label"> Select minimal offset in pixels: </p>
+	<input type="number" id = "offset_min"></input>
+
+	<p id="offset_max_label"> Select maximal offset in pixels: </p>
+	<input type="number" id = "offset_max"></input>
+
+	<div id="buttons">
+
+	<button id = "randomize" onclick="randomizeFields()">Randomize</button>
+	<button id = "generate" onclick="createHorizontalBars2()">Generate</button>
+
+	</div>
+
+</div>
+
+<div id = "svg_button">
+
+<svg id = "set" viewbox = "0 0 100 100" onclick = "settings_click()">
+	<rect x = "20" y = "15" width = "70" height = "10"  fill = "white"/>
+	<rect x = "20" y = "45" width = "70" height = "10"  fill = "white"/>
+	<rect x = "20" y = "75" width = "70" height = "10"  fill = "white"/>
+	<!-- <path d = "M 31 24.5 A 14 20, 0, 0 1, 9 24.5" fill = "none" stroke = "white"/> -->
+
+	<circle cy = "20" cx = "20" r = "12"  fill = "white"/>
+	<circle cy = "50" cx = "20" r = "12"  fill = "white"/>
+	<circle cy = "80" cx = "20" r = "12"  fill = "white"/>
+
+
+</svg>
+</div>
+
+</body>
+</html>
