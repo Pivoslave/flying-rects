@@ -221,6 +221,8 @@ svg{ 	position:absolute;
     aspect-ratio: 1/1;
     right: 1%;
     top: 1%;
+    visibility: hidden;
+    pointer-events: none;
 }
 
 #buttons{

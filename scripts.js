@@ -10,7 +10,14 @@ var rect_vertical_offset = new Array(0);
 var incrementer = 0;
 var amount = 0;
 
-addEventListener("resize", (event) => {document.getElementById("svg_page").setAttribute("width", window.innerWidth)});
+addEventListener("resize", (event) => {
+    document.getElementById("svg_page").setAttribute("width", window.innerWidth);
+    document.getElementById("svg_page").setAttribute("height", window.innerHeight);
+    console.log(window.innerWidth + ", " + window.innerHeight);
+});
+
+window.onresize = resize;
+
 
 function angleToRadian(angle){
 
@@ -116,7 +123,7 @@ function generateAnimation(xoffset, yoffset){
     svgstyle.innerHTML = defineanim + svgstyle.innerHTML + newanim;
 
 
-    console.log(xoffset + "; " + yoffset);
+    //console.log(xoffset + "; " + yoffset);
 }
 
 function generateAnimation2(xoffset, yoffset, time){
