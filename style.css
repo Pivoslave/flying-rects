@@ -1,18 +1,22 @@
-body {	background-color: black;
-    margin: 0px;
+body {
+    background-color: black;
+    margin: 0;
     height: 100%;
     width: 100%;
     overflow-x: hidden;
+    position: relative;
 }
 
-canvas{	position: absolute;
+canvas{
+    position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
 }
 
-svg{ 	position:absolute;
+svg{
+    position:absolute;
     top:0;
     bottom:0;
     left:0;
@@ -22,15 +26,12 @@ svg{ 	position:absolute;
 
 #right_sec{
     position: absolute;
-
     height: 100%;
     width: 25%;
-
     left: -75%;
-
     overflow: hidden;
-
     background-color: darkgray;
+    display: none;
 }
 
 #angles_label{
@@ -43,7 +44,6 @@ svg{ 	position:absolute;
 #angles{
     position: relative;
     left: 5%;
-
     width: 90%;
     height: 2%;
     margin-top: 5px;
@@ -85,10 +85,10 @@ svg{ 	position:absolute;
     box-sizing: border-box;
     background-color: rgba(152, 251, 152, 0.6);
     color: black;
-    border: 0px solid black;
+    border: 0 solid black;
     outline: none;
     border-radius: 5px;
-    padding: 0px;
+    padding: 0;
     -moz-appearance:textfield;
 }
 
@@ -208,12 +208,13 @@ svg{ 	position:absolute;
 #set{
     width: 100%;
     aspect-ratio: 1/1;
-    border: 2px solid black;
+    border: none;
     transition-duration: 0.4s;
+    top: 2vh;
 }
 
 #set:hover{
-    background-color: darkred;
+    background-color: rgb(40, 40, 40);
     color: white;
 }
 
@@ -223,8 +224,6 @@ svg{ 	position:absolute;
     aspect-ratio: 1/1;
     right: 1%;
     top: 1%;
-    visibility: hidden;
-    pointer-events: none;
 }
 
 #buttons{
@@ -267,6 +266,159 @@ svg{ 	position:absolute;
     color: white;
 }
 
+#rightsec-2{
+    position: absolute;
+    width: calc(40% - 2px - 4vw);
+    height: calc(100vh - 2px - 4vh);
+    right: 0;
+    background-color: black;
+    border: 1px solid darkcyan;
+    visibility: visible;
+    padding: 2vh 2vw;
+}
+
+#rightsec-2.closed{
+    visibility: hidden;
+}
+
+#rightsec-2 > div.crossmark{
+    display: flex;
+    width: 100%;
+    position: relative;
+    justify-content: flex-end;
+}
+
+#rightsec-2 h5{
+    color: white;
+    font-family: "Cascadia Code", sans-serif;
+    font-size: 0.6vw;
+}
+
+#rightsec-2 input{
+    color: white;
+    background-color: black;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 0 3%;
+    font-family: "Cascadia Code", sans-serif;
+    font-size: 0.6vw;
+}
+
+._1text1field{
+    display: flex;
+    max-height: 4vh;
+    column-gap: 2vw;
+    align-items: center;
+}
+
+._1text1field > h5{
+    width: calc(40% - 2vw);
+}
+
+._1text1field > div{
+    width: calc(60% - 2vw);
+}
+
+._1text1field > div > input{
+    width: 100%;
+}
+
+._1text2field{
+    display: flex;
+    max-height: 4vh;
+    column-gap: 2vw;
+    align-items: center;
+}
+
+._1text2field > h5{
+    width: calc(40% - 2vw);
+}
+
+._1text2field > div{
+    display: flex;
+    width: 60%;
+    align-items: center;
+}
+
+._1text2field > div > input{
+    width: calc(50% - 1vw);
+    height: 100%;
+}
+
+._1text2field > div > h5{
+    width: 1vw; !important;
+    text-align: center;
+    color: white;
+}
+
+._1text1check{
+    display: flex;
+    align-items: center;
+    column-gap: 5vh;
+}
+
+._1text1check > img{
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+._1text1check > img.checked{
+    content: url("assets/white-check.svg");
+}
+
+._2images{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2vh;
+    margin-bottom: 3vh;
+}
+
+._2images > img{
+    height: 10vh;
+    aspect-ratio: 1/1;
+}
+
+._controls{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 4vh;
+}
+
+._controls > button{
+    background-color: darkgreen;
+    color: white;
+    width: 30%;
+    height: 5vh;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+._controls > button + button{
+    background-color: darkgoldenrod;
+}
+
+#popup{
+    position: absolute;
+    width: calc(40% - 4px);
+    height: calc(15vh - 4px);
+    background-color: #390000;
+    right: 0;
+    top: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid darkcyan;
+    flex-flow: column nowrap;
+}
+
+#popup > h5{
+    color: white;
+    font-family: "Cascadia Code", sans-serif;
+    font-size: 1vw;
+    margin: 0 0 2px 2px;
+}
+
 @keyframes open{
 
     0%{
@@ -286,6 +438,30 @@ svg{ 	position:absolute;
 
     100%{
         left: 100%;
+    }
+}
+
+@keyframes open2 {
+    0%{
+        pointer-events: none;
+        visibility: hidden;
+    }
+
+    100%{
+        pointer-events: visible;
+        visibility: visible;
+    }
+}
+
+@keyframes close2 {
+    0%{
+        pointer-events: visible;
+        visibility: visible;
+    }
+
+    100%{
+        pointer-events: none;
+        visibility: hidden;
     }
 }
 

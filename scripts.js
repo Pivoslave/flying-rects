@@ -11,7 +11,8 @@ var incrementer = 0;
 var amount = 0;
 
 
-
+window.onload = () => { randomizeFields2(); generateBlocks2(); }
+window.onresize = () => {generateBlocks2();}
 
 function angleToRadian(angle){
 
@@ -54,25 +55,11 @@ function resize() {
 
 // відповідає за анімацію виїжджання/заїжджання правого div'у
 function settings_click(){
-    var divis = document.getElementById("right_sec");
+    let right_bar = document.querySelector("#rightsec-2");
 
-    var isOpen = divis.style.left == "75%" ? true : false;
+    right_bar.classList.toggle('closed');
 
-    console.log(isOpen);
-
-    if(!isOpen){
-
-        divis.style.left = "100%";
-        setTimeout(function() {divis.style.left = "75%";}, 900);
-        divis.style.animation = "1s linear open";
-
-    }
-
-    else{
-        setTimeout(function() {divis.style.left = "-100000px";}, 900);
-        divis.style.animation = "1s linear close";
-
-    }
+    //right_bar.style.animation = right_bar.classList.contains('closed') ? "1s linear open2" : "1s linear close2";
 }
 
 
@@ -89,19 +76,13 @@ function getFigureWidth(width, length, sinus, cosinus){
 }
 
 
-//габела...
+//габела... UPD: вже не габела, старий JS-початківцю Я :)
 function generateAnimationTime(min, max, step){
 
     let iterations = (max - min)/step;
+    let plus = getRandomIntInclusive(1, iterations);
 
-    console.log(iterations);
-
-    let plus = getRandomIntInclusive(0, iterations);
-
-    console.log(plus);
-    plus*=step;
-
-    return Number(min)+Number(plus);
+    return Number((((plus * step)+min)/1000));
 
 
 }
@@ -362,7 +343,7 @@ function randomizeFields(){
     document.getElementById("offset_max").value = max_offset;
 }
 
-function CheckAllFields(){
+function CheckAllFields(){ // deprecated
 
     if(document.getElementById("angles").value > 90 || document.getElementById("angles").value < -90) return false;
     if(document.getElementById("min_width").value <= 0 || document.getElementById("min_width").value > document.getElementById("max_width").value || document.getElementById("max_width").value <= 0) return false;
@@ -377,4 +358,150 @@ function CheckAllFields(){
     return true;
 }
 
+function checkAllFields(){
 
+    let firstInc = 0;
+    let checkforNaN = [...document.querySelectorAll("#rightsec-2 input")]
+        .map(el => [firstInc++, el.value])
+        .filter(el => isNaN(el[1]) || el[1] === "" || el[1] === null)
+        .map(el => el[0]);
+    checkforNaN = [...[true], checkforNaN].flat();
+
+    if(checkforNaN.length !== 1) return checkforNaN;
+
+    let inputvals = [...document.querySelectorAll("#rightsec-2 input")].map(el => el.value).map(el => Number(el));
+
+    let res =  []; res.push(inputvals[0] >= -24,
+            inputvals[0] <= 24,
+            inputvals[1] >= 0, inputvals[2] >= inputvals[1],
+            inputvals[3] >= 0, inputvals[4] >= inputvals[3],
+            inputvals[5] >= 0, inputvals[5] <= 255,
+            inputvals[6] >= 0 , inputvals[6] <= 255 ,
+            inputvals[7] >= 0 , inputvals[7] <= 255 ,
+            inputvals[8] >= 0 , inputvals[8] <= 255 ,
+            inputvals[9] >= 0 , inputvals[9] <= 255 ,
+            inputvals[10] >= 0 , inputvals[10] <= 255 ,
+            inputvals[11] >= 0 , inputvals[12] >= inputvals[11] ,
+            inputvals[13] >= 0 ,
+            inputvals[14] >= 0 , inputvals[15] >= inputvals[14]);
+
+
+    increm = 0;
+    let mask = [0, 0, 1, 2, 3, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 12, 13, 14, 15];
+
+    mask = mask.map(el => el = [el, res[increm++]])
+        .filter(el => el[1] === false).map(el => el[0]);
+    mask = [...[false], mask].flat();
+
+    //return (mask.filter(el => el[1] === false).map(el => el[0]).length === 0 ? null : mask.filter(el => el[1] === false).map(el => el[0]));
+    return mask.length === 1 ? null : mask;
+
+}
+
+
+
+function checkButton(){
+    document.querySelector("#rightsec-2 ._1text1check img").classList.toggle("checked");
+}
+
+function randomizeFields2(){
+    let inputs = document.querySelectorAll("#rightsec-2 input");
+    let binaryInput = document.querySelector("#rightsec-2 ._1text1check img");
+
+    let ang = []; ang.push(getRandomIntInclusive(-14, 16));
+    let widths = []; widths.push(getRandomIntInclusive(1, 18)); widths.push(getRandomIntInclusive(widths[0]*1.5, widths[0]*3));
+    let heights = []; heights.push(getRandomIntInclusive(widths[1] * 2, widths[1] * 3)); heights.push(getRandomIntInclusive(heights[0]*1.5, heights[0]*3));
+    let r_c = []; r_c.push(getRandomIntInclusive(0, 254)); r_c.push(getRandomIntInclusive(r_c[0], 255));
+    let g_c = []; g_c.push(getRandomIntInclusive(0, 254)); g_c.push(getRandomIntInclusive(g_c[0], 255));
+    let b_c = []; b_c.push(getRandomIntInclusive(0, 254)); b_c.push(getRandomIntInclusive(b_c[0], 255));
+    let anim = []; anim.push(getRandomIntInclusive(1000, 2000)); anim.push(getRandomIntInclusive(anim[0]*1.5, anim[0]*3));
+    let anim_step = []; anim_step.push(getRandomIntInclusive(90, 156));
+    let offsets = []; offsets.push(getRandomIntInclusive(0, 10)); offsets.push(getRandomIntInclusive(offsets[0]*1.5, offsets[0] * 3));
+    let randVals = [...ang, widths, heights, r_c, g_c, b_c, anim, anim_step, offsets].flat();
+
+
+    let iterator = 0;
+    for(let inp of document.querySelectorAll("#rightsec-2 input")) {
+        inp.value = randVals[iterator];
+        iterator++;
+    }
+
+
+    if(getRandomIntInclusive(0, 1) === 1)
+        binaryInput.classList.toggle("checked");
+
+    updateColorPresenters();
+}
+
+function generateBlocks2(){
+
+    //console.log(checkAllFields());
+    if(checkAllFields() !== null) wrongFieldHighlighter(checkAllFields());
+
+    else {
+        createOrGetSVG();
+
+        incrementer = 0;
+
+        let fillWidth = document.querySelector("#rightsec-2 ._1text1check img").classList.contains("checked") ? getRandomIntInclusive(10, 50) : 0.0;
+        let svg_width = window.innerWidth;
+
+        let inputData = [...document.querySelectorAll("#rightsec-2 input")].map(el => el.value);
+
+        while (fillWidth <= svg_width) {
+
+            let r_w = getRandomIntInclusive(inputData[1], inputData[2]);
+            let r_h = getRandomIntInclusive(inputData[3], inputData[4]);
+
+            generateAngledRect3(
+                (inputData[0] >= 0 ? fillWidth + getFigureWidth(r_w, r_h, Math.sin(inputData[0]), Math.cos(inputData[0])) : fillWidth),
+                0, inputData[0], r_w, r_h, getRandomIntInclusive(inputData[5], inputData[6]),
+                getRandomIntInclusive(inputData[7], inputData[8]), getRandomIntInclusive(inputData[9], inputData[10]),
+                generateAnimationTime(inputData[11], inputData[12], inputData[13]),
+                getRandomIntInclusive(inputData[14], inputData[15])
+            );
+
+            fillWidth = fillWidth + getFigureWidth(r_w, r_h, Math.sin(inputData[0]), Math.cos(inputData[0]))
+                + (getRandomIntInclusive(getFigureWidth(r_w, r_h, Math.sin(inputData[0]), Math.cos(inputData[0])) * 1.1, getFigureWidth(r_w, r_h, Math.sin(inputData[0]), Math.cos(inputData[0])) * 1.2)
+                    - getFigureWidth(r_w, r_h, Math.sin(inputData[0]), Math.cos(inputData[0])));
+
+            incrementer++;
+        }
+    }
+}
+
+function updateColorPresenters(){
+    let inputData = [...document.querySelectorAll("#rightsec-2 input")].
+    filter(el => el.parentNode.parentNode.children[0].textContent.includes('component'))
+        .map(el => el.value);
+
+    let colorBricks = document.querySelectorAll("._2images > img");
+
+    document.querySelectorAll("._2images > img")[0].style.backgroundColor = `rgb(${inputData[0]}, ${inputData[2]}, ${inputData[4]})`;
+    document.querySelectorAll("._2images > img")[1].style.backgroundColor = `rgb(${inputData[1]}, ${inputData[3]}, ${inputData[5]})`;
+}
+
+function wrongFieldHighlighter(...checks){
+
+    checks = checks[0];
+    let nanFields = checks[0];
+    checks.shift();
+    let inputs = [...document.querySelectorAll("#rightsec-2 input")];
+    inputs.map(el => el.style.borderColor = "");
+
+    for (let indice of checks) {inputs[indice].style.borderColor = "red"; setTimeout(() => inputs[indice].style.borderColor = "", 3000)};
+
+    createPopupAlert(nanFields);
+}
+
+function createPopupAlert(isnan){
+
+    if(document.getElementById('popup') !== null) document.getElementById('popup').remove();
+    let popup = document.createElement("div");
+    document.body.appendChild(popup);
+    popup.outerHTML = `<div id='popup'> <h5>${isnan ? "One or more fields hold a non-number value" : "Incorrect value"}</h5>
+    ${!isnan?  "<h5>Check if angles are in -24 .. 24 diapason,</h5> <h5>Color values are in 0 .. 255 diapason,</h5> <h5>Each other value is bigger than 0,</h5> <h5>And that every second field in pair holds bigger value.</h5>"   : ""}
+    </div>`;
+
+    setTimeout(() => document.getElementById('popup').remove(), 4000);
+}

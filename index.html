@@ -11,12 +11,13 @@
 
 
 </head>
-<body id = "bod" onload="resize()">
+<body id = "bod">
 
 <div id = "testdiv">
 
 </div>
 
+<!-- this div is deprecated -->
 <div id = "right_sec" >
 	
 	<p id = "angles_label">Choose an angle of lines (-90...90):</p>
@@ -100,6 +101,103 @@
 
 
 </svg>
+</div>
+
+<!-- new -->
+<div id="rightsec-2" class="closed">
+
+	<div class="crossmark">
+		<img src="assets/white-crossmark.svg" onclick="settings_click()" id="crossmark">
+	</div>
+
+	<div class="_1text1field">
+		<h5>Angle (-24 .. 24):</h5>
+		<div><input type="text"></div>
+	</div>
+
+	<div class="_1text2field">
+		<h5>Rectangle width: </h5>
+		<div>
+			<input type="text">
+			<h5>-</h5>
+			<input type="text">
+		</div>
+	</div>
+
+	<div class="_1text2field">
+		<h5>Rectangle height: </h5>
+		<div>
+			<input type="text">
+			<h5>-</h5>
+			<input type="text">
+		</div>
+	</div>
+
+	<div class="_1text1check">
+		<h5>Blank space on start?</h5>
+		<img src="assets/black-bg.svg" onclick="checkButton()">
+	</div>
+
+	<div class="_1text2field">
+		<h5>Red component (0-255): </h5>
+		<div>
+			<input type="text" onchange="updateColorPresenters()">
+			<h5>-</h5>
+			<input type="text" onchange="updateColorPresenters()">
+		</div>
+	</div>
+
+	<div class="_1text2field">
+		<h5>Green component (0-255): </h5>
+		<div>
+			<input type="text" onchange="updateColorPresenters()">
+			<h5>-</h5>
+			<input type="text" onchange="updateColorPresenters()">
+		</div>
+	</div>
+
+	<div class="_1text2field">
+		<h5>Blue component (0-255): </h5>
+		<div>
+			<input type="text" onchange="updateColorPresenters()">
+			<h5>-</h5>
+			<input type="text" onchange="updateColorPresenters()">
+		</div>
+	</div>
+
+	<div class="_2images">
+			<img>
+			<img>
+	</div>
+
+	<div class="_1text2field">
+		<h5>Animation length in ms: </h5>
+		<div>
+			<input type="text">
+			<h5>-</h5>
+			<input type="text">
+		</div>
+	</div>
+
+	<div class="_1text1field">
+		<h5>Animation rand step in ms:</h5>
+		<div><input type="text"></div>
+	</div>
+
+	<div class="_1text2field">
+		<h5>Offset in pixels: </h5>
+		<div>
+			<input type="text">
+			<h5>-</h5>
+			<input type="text">
+		</div>
+	</div>
+
+	<div class="_controls">
+		<button onclick="generateBlocks2()">Generate</button>
+		<button onclick="randomizeFields2()">Randomise</button>
+	</div>
+
 </div>
 
 </body>
