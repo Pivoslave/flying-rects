@@ -392,6 +392,7 @@ svg{
     border: none;
     border-radius: 20px;
     cursor: pointer;
+    font-family: "Cascadia Code", sans-serif;
 }
 
 ._controls > button + button{
@@ -417,6 +418,54 @@ svg{
     font-family: "Cascadia Code", sans-serif;
     font-size: 1vw;
     margin: 0 0 2px 2px;
+}
+
+@media (max-width: 991px){
+
+    body{
+        overflow-y: hidden;
+    }
+
+    #svg_button{
+        width: 8%;
+    }
+
+    #rightsec-2{
+        width: calc(97% - 2px - 4vw);
+    }
+
+    #rightsec-2 h5, #rightsec-2 input{
+        font-size: 2vw;
+    }
+
+    ._1text1check{
+        justify-content: space-between;
+    }
+
+    ._1text1check > img{
+        margin-right: 10vw;
+    }
+
+    #popup{
+        width: calc(97% - 4px);
+    }
+
+    #popup > h5{
+        font-size: 2.4vw;
+    }
+
+    ._controls > button{
+        transition-duration: 0.1s;
+    }
+
+    ._controls > button:focus{
+        background-color: #084808;
+    }
+
+    ._controls > button+button:focus{
+        background-color: #a0740a;
+    }
+
 }
 
 @keyframes open{
@@ -462,11 +511,5 @@ svg{
     100%{
         pointer-events: none;
         visibility: hidden;
-    }
-}
-
-@media (max-width: 991px){
-    svg{
-        pointer-events: none;
     }
 }
